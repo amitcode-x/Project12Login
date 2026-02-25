@@ -5,6 +5,8 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import authenticate, login,logout
 from django.urls import reverse 
 
+from django.contrib.auth.decorators import login_required
+
 
 from django.core.mail import send_mail
 
@@ -14,6 +16,16 @@ from app.models import *
 from app.forms import *
 
 # Create your views here.
+
+
+
+
+def home(request):
+    if request.session.get('username'):
+        username=request.session.get('username')
+        d={'username':username}
+        return render(request,'home.html',d)
+    return render(request,'home.html')
 
 
 def registration(request):
@@ -67,9 +79,17 @@ def Loginuser(request):
             if AUO.is_active:
                 login(request, AUO)
                 request.session['username'] = username
-                return HttpResponseRedirect(reverse('dummy'))
+                return HttpResponseRedirect(reverse('home'))
             else:
                 return HttpResponse("Your account is not active")
         else:
             return HttpResponse("Invalid username or password")
-    return render(request,"login.html")
+    return render(request,"Loginuser.html")
+
+
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('home'))
