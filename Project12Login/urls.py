@@ -19,12 +19,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
+from django.conf.urls.static import static
+from django.conf import settings
+
 from app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registration/',registration, name="registration"),
     path("dummy/", dummy, name="dummy"),
-        path('home/',home,name='home'),
+    path('registration/',registration, name="registration"),
+    path('home/',home,name='home'),
     path('Loginuser/',Loginuser,name='Loginuser'),
     path('user_logout/',user_logout,name='user_logout'),
-]
+    path('Profile_display/', Profile_display, name="Profile_display")
+    
+    
+    
+]+static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)
