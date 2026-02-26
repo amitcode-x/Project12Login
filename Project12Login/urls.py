@@ -31,7 +31,8 @@ urlpatterns = [
     path('home/',home,name='home'),
     path('Loginuser/',Loginuser,name='Loginuser'),
     path('user_logout/',user_logout,name='user_logout'),
-    path('Profile_display/', Profile_display, name="Profile_display")
+    path('Profile_display/', Profile_display, name="Profile_display"),
+    path("chanage_password/", chanage_password, name="chanage_password")
     
     
     

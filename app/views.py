@@ -102,3 +102,15 @@ def Profile_display(request):
     d = {'UO': UO, 'PO': PO}
     
     return render(request,'Profile_display.html',d)
+
+@login_required
+def chanage_password(request):
+    if request.method == 'POST':
+        cp = request.POST['cp']
+        un = request.session.get('username')
+        UO = User.objects.get(username = un)
+        UO.set_password(cp)
+        UO.save()
+        return HttpResponse('Password changed success ful')
+    
+    return render(request,"chanage_password.html")
