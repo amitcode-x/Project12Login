@@ -113,4 +113,4 @@ def chanage_password(request):
         UO.save()
         return HttpResponse('Password changed success ful')
     
-    return render(request,"chanage_password.html")
+    return render(request,"chanage_password.html")  
